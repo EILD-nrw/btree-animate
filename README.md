@@ -1,4 +1,4 @@
-# BBaum Visualiserung
+# BBaum Animation
 
 ## Nutzung
 
