@@ -82,8 +82,8 @@ let uploadValues = [];
 let swappedValue;
 let updatedNodes = [];
 
-const expInit = "Herzlich willkommen beim B-Baum Animator! <br> <br> " +
-	"Dieses Tool dient dazu, die Vorgehensweise beim Einfügen und Löschen von Werten im B-Baum darzustellen. <br> <br> " +
+const expInit = "Herzlich willkommen beim B-Baum-Animator! <br> <br> " +
+	"Diese Animation dient dazu, die Vorgehensweise beim geordneten Einfügen und Löschen von Werten im B-Baum darzustellen. <br> <br> " +
 	"Geben Sie dazu den Wert in die Zeile ein und klicken auf 'Einfügen' oder auf 'Löschen', um einen bereits eingefügten Wert wieder zu entfernen. <br> <br> " +
 	"Anschließend wird der Ablauf schrittweise animiert und erklärt. <br> <br> " +
 	"Für weitere Informationen, klicken Sie auf 'Hilfe'."
@@ -98,13 +98,11 @@ const expHelp = "Die Anwendung soll die Schritte beim Aufbau eines B-Baums visua
 	"Eine korrekte Einordnung der Elemente kann bei einem Baum des Typs 1 für die Tiefe 5 (bei Zahlen) bzw. 4 (bei Wörtern) garantiert werden. <br> " +
 	"Bei größeren Typen verringert sich die Tiefe. "
 
-const expAnimationDeactivated = "Animationen sind deaktiviert. Bei Bedarf können sie im 'Konfigurieren'-Menü aktiviert werden.";
+const expAnimationDeactivated = "Animationen sind deaktiviert. Bei Bedarf können sie mit einem Haken bei 'Animation: aus' wieder aktiviert werden.";
 
-const expAnimationDone = "Die Animation ist abgeschlossen. <br> <br> Sie können nun einen weiteren Wert eingeben.";
+const expAnimationDone = "Die Animation ist abgeschlossen. <br> <br> Sie können nun eine weitere Operation eingeben.";
 
-const expUnderflow = "Es ist ein Underflow entstanden. <br> <br> Die markierten Knoten werden zusammengefügt, um den Underflow zu beheben.";
-
-const expNewUnderflow = "Ein weiterer Underflow ist entstanden. <br> <br> Die markierten Knoten werden zusammengefügt, um den Underflow zu beheben.";
+const expUnderflow = "Der markierte Knoten besitzt zu wenig Elemente (Unterlauf). <br> <br> Die markierten Knoten werden zusammengefügt, um den Unterlauf zu beheben.";
 
 const expRotateRight = "Der linke Nachbarknoten des gelöschten Wertes besitzt genug Elemente, um eines zu stehlen. <br> <br> " +
 	"Dafür rotieren wir die markierten Werte nach rechts.";
@@ -145,15 +143,19 @@ inputDeleteButton.addEventListener('click', function(){
 });
 
 resetButton.addEventListener('click', function(){
-	resetTree();
+	if (confirm("Um einen neuen Baum zu erstellen, wird der aktuelle Baum gelöscht.")) {
+		resetTree();
+	}
 });
 
 changeTypeButton.addEventListener('click', function(){
-	for (const radioButton of radiosTreeType) {
-		if (radioButton.checked) {
-			treeType = parseInt(radioButton.value);
-			resetTree();
-			break;
+	if (confirm("Um den Typ zu ändern, wird der aktuelle Baum gelöscht.")){
+		for (const radioButton of radiosTreeType) {
+			if (radioButton.checked) {
+				treeType = parseInt(radioButton.value);
+				resetTree();
+				break;
+			}
 		}
 	}
 });
@@ -173,10 +175,12 @@ fileUpload.addEventListener("change",function(event){
 });
 
 drawTreeFromUploadButton.addEventListener("click", function() {
-	modal.style.display = "none";
-	resetTree();
-	uploadValues = btreeValuesFromUpload.split(',');
-	drawTreeFromUpload();
+	if (confirm("Um den Import zu beginnen, wird der aktuelle Baum gelöscht.")){
+		modal.style.display = "none";
+		resetTree();
+		uploadValues = btreeValuesFromUpload.split(',');
+		drawTreeFromUpload();
+	}
 });
 
 animationSpeedSlider.addEventListener("change", function(){
@@ -272,7 +276,7 @@ function resumeAnimation(){
 					resetAnimationStepVariables();
 					tempTree[checkIfNodeIsInArray(tempTree, deletedValue)[1]].color = red;
 					explanationText = "Das Element '" + deletedValue + "' kann gelöscht werden, da es sich in einem Blatt befindet. <br> <br> " +
-						"Durch das Löschen entsteht kein Underflow, der B-Baum ist weiterhin balanciert.";
+						"Durch das Löschen entsteht kein Unterlauf, der B-Baum ist weiterhin balanciert.";
 					drawTree(tempTree);
 					nodeCanGetDeletedNow = true;
 					pauseAnimation();
@@ -431,7 +435,7 @@ function resumeAnimation(){
 					let eventValues = returnEventValues("handleUnderFlowMergeWithRightNeighbor");
 					let childrenValues = eventValues[0][eventValues[0].length - 1];
 					eventValues[0].splice(eventValues[0].length - 1, 1);
-					explanationText = expNewUnderflow;
+					explanationText = expUnderflow;
 					for (let i = 0; i < eventValues[0].length; i++) {
 						for (let j = 0; j < eventValues[0][i].length; j++) {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
@@ -471,7 +475,7 @@ function resumeAnimation(){
 					let eventValues = returnEventValues("handleUnderFlowMergeWithLeftNeighbor");
 					let childrenValues = eventValues[0][eventValues[0].length - 1];
 					eventValues[0].splice(eventValues[0].length - 1, 1);
-					explanationText = expNewUnderflow;
+					explanationText = expUnderflow;
 					for (let i = 0; i < eventValues[0].length; i++) {
 						for (let j = 0; j < eventValues[0][i].length; j++) {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
@@ -911,7 +915,7 @@ function inputInsert(inputInsertValue){
 			isDeleting = false;
 			if(!isAnimationDisabled){
 				animationComplete = false;
-				explanationText = "Der Wert '" + input + "' wird dem Baum hinzugefügt."
+				explanationText = "Der Wert '" + input + "' wird dem Baum hinzugefügt. <br> <br> Ein Klick auf '>' führt zum nächsten Schritt der Animation."
 				drawTree(oldTree);
 				insertNode = null;
 				getBTree(y);
@@ -968,7 +972,7 @@ function inputDelete(inputDeleteValue){
 		deletedValue = deleteValue;
 		if(!isAnimationDisabled) {
 			let index = checkIfNodeIsInArray(oldTree, deleteValue)[1];
-			explanationText = "Das Element '" + deleteValue + "' wird aus dem Baum gelöscht.";
+			explanationText = "Das Element '" + deleteValue + "' wird aus dem Baum gelöscht. <br> <br> Ein Klick auf '>' führt zum nächsten Schritt der Animation.";
 			animationComplete = false;
 			drawTree(oldTree);
 			drawRectangle(oldTree[index].x, oldTree[index].y, rectangleWidth, rectangleHeight, deleteValue, red);
@@ -1273,7 +1277,7 @@ function drawReassembledTree(){
 				oldLineCoordinatesXY = lineCoordinatesXY;
 				activateButton(resetButton);
 				inputButton.textContent = "Einfügen";
-				inputDeleteButton.textContent = "Löschen";
+				inputDeleteButton.textContent = "Löschen1";
 				disableButton(animationPauseButton);
 				explanationText = expAnimationDone;
 				calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
@@ -1358,16 +1362,16 @@ function insertDraw(){
 		let valueList = returnEventValues("gonnaSplit");
 
 		if(splitcounter > 1){
-			explanationText = "Die grün markierten Knoten sind voll. Um den Wert einzufügen, müssen sie aufgeteilt werden. <br> " +
+			explanationText = "Die grün markierten Knoten sind vollständig belegt. Um den Wert einzufügen, müssen sie aufgeteilt werden. <br> " +
 				"Dafür fügt man das Element zunächst gedanklich in den untersten Knoten ein. <br> " +
-				"Der dabei entstandene mittlere Wert des Knotens (in dem Fall '" + valueList[0][treeType] + "') wird herausgezogen und als Elternknoten eingefügt. <br> <br> " +
-				"Wenn der Elternknoten auch bereits voll ist, wird dies wiederholt bis man an der Wurzel angekommen ist.";
+				"Der dabei in der Mitte stehende Wert '" + valueList[0][treeType] + "' des Knotens wird in den Elternknoten eingefügt. <br> <br> " +
+				"Wenn der Elternknoten auch bereits vollständig belegt ist, wird dies wiederholt bis man an der Wurzel angekommen ist.";
 		}else if(splitcounter === 1){
-			explanationText = "Der grün markierte Knoten ist voll. Um den Wert einzufügen, muss er aufgeteilt werden. <br> " +
+			explanationText = "Der grün markierte Knoten ist vollständig belegt. Um den Wert einzufügen, muss er aufgeteilt werden. <br> " +
 				"Dafür fügt man das Element zunächst gedanklich in den Knoten ein. <br> " +
-				"Der dabei entstandene mittlere Wert des Knotens (in dem Fall '" + valueList[0][treeType] + "') wird herausgezogen und als Elternknoten eingefügt.";
+				"Der dabei in der Mitte stehende Wert '" + valueList[0][treeType] + "' des Knotens wird in den Elternknoten eingefügt.";
 		}else{
-			explanationText = "Der Wert '" + insertNode.key + "' kann direkt eingefügt werden, da der passende Knoten noch nicht komplett voll ist.";
+			explanationText = "Der Wert '" + insertNode.key + "' kann direkt eingefügt werden, da der passende Knoten noch mindestens ein Element aufnehmen kann.";
 		}
 		calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 		pauseAnimation();
@@ -1610,7 +1614,7 @@ function getBTree(yValue){
 function calculateWrapTextAndDraw(text, x, y, width, lineHeight, fillStyle) {
 	c.clearRect(11, 11, width, explanationBoxHeight);
 	c.font = "16px Roboto";
-	c.fillStyle = "#98c1d5"
+	c.fillStyle = "#98c1d5";
 	c.fillRect(explanationBoxX, explanationBoxY, width + 10, explanationBoxHeight);
 	c.strokeRect(11,11, width + 10, explanationBoxHeight);
 	let words = text.split(' ');
