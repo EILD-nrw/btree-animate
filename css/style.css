@@ -103,12 +103,14 @@ button{
 	font-weight: bold;
 }
 
+#treeInputInsert {
+	padding:10px 15px;
+	background-color: #98c1d5;
+	border: 2px solid black;
+	border-radius: 3px;
+}
 canvas {
 	display:flex;
-}
-
-#submitInsert, #submitDelete {
-	width : 80px;
 }
 
 #firstRowInput {
