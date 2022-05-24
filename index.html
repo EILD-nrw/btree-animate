@@ -1,63 +1,84 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="utf-8">
-        <title>B-Baum Animation</title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-    <header class="main-header">
-        <h1>B-Baum Animation</h1>
-    </header>
-    <div class="form" id="firstRowInput">
-        <div>
-            <div class="form-inputs">
-                <label for="treeInputInsert"></label>
-                <input type="text" id="treeInputInsert" maxlength="10">
-                <button type="button" id="submitInsert">Einfügen</button>
-                <button type="button" id="submitDelete">Löschen</button>
-                <button type="button" id="animationPause">||</button>
-                <p class="tooltip fade-in">Animation pausieren</p>
-                <button type="button" id="submitReset">Zurücksetzen</button>
-                <button type="button" id="importButton">Import</button>
-                <button type="button" id="helpButton">Hilfe</button>
-            </div>
-            <form class="form-radio">
-                <label>Typ des Baumes:</label>
-                <input type="radio" id="treeType1" checked="checked" value="1" name="treeType">
-                <label for="treeType2">1</label>
-                <input type="radio" id="treeType2" value="2" name="treeType">
-                <label for="treeType3">2</label>
-                <input type="radio" id="treeType3" value="3" name="treeType">
-                <label for="treeType4">3</label>
-                <input type="radio" id="treeType4" value="4" name="treeType">
-                <label for="treeType5">4</label>
-                <input type="radio" id="treeType5" value="5" name="treeType">
-                <label for="treeType1">5</label>
-                <button type="button" id="changeType">Ändern</button>
-            </form>
+<head>
+    <meta charset="utf-8">
+    <title>B-Baum Animation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="main-header">
+    <h1>B-Baum Animation</h1>
+</header>
+<div class="form" id="firstRowInput">
+    <div>
+        <div class="form-inputs">
+            <input type="text" id="treeInputInsert" maxlength="10">
+            <button type="button" id="submitInsert">Einfügen</button>
+            <button type="button" id="submitDelete">Löschen</button>
+            <button type="button" id="animationPause">||</button>
+            <p class="tooltip fade-in">Animation pausieren</p>
+            <button type="button" id="submitReset">Zurücksetzen</button>
+            <button type="button" id="importButton">Import</button>
+            <button type="button" id="helpButton">Hilfe</button>
         </div>
-        <div class="form-animation">
+        <form class="form-radio">
 
-            <div id="sliderDiv">
-                <input type="checkbox" class="checkbox" id="animationCheckbox" checked>
-                <label id="animationsgeschwindigkeit" for="animationCheckbox">Animation an</label>
+            <label for="treeInputInsert"></label>
+            <label>Typ des Baumes:</label>
+            <input type="radio" id="treeType1" checked="checked" value="1" name="treeType">
+            <label for="treeType2">1</label>
+            <input type="radio" id="treeType2" value="2" name="treeType">
+            <label for="treeType3">2</label>
+            <input type="radio" id="treeType3" value="3" name="treeType">
+            <label for="treeType4">3</label>
+            <input type="radio" id="treeType4" value="4" name="treeType">
+            <label for="treeType5">4</label>
+            <input type="radio" id="treeType5" value="5" name="treeType">
+            <label for="treeType1">5</label>
+            <button type="button" id="changeType" style="margin-left: 10px">Ändern</button>
+        </form>
+    </div>
+    <div class="form-animation">
 
-                <input class="slider" type="range" min="1" max="13" value="7" step="2" id="animationsgeschwindigkeitslider">
-                <label id="animationsgeschwindigkeit" for="animationsgeschwindigkeitslider">Animationsgeschwindigkeit: Normal</label>
-            </div>
+        <div id="sliderDiv">
+            <input type="checkbox" class="checkbox" id="animationCheckbox" checked>
+            <label id="animationsgeschwindigkeit" for="animationCheckbox">Animation: an</label>
+
+            <input class="slider" type="range" min="1" max="13" value="7" step="2" id="animationsgeschwindigkeitslider" style="margin-top: 10px">
         </div>
+
     </div>
-    <div id="importModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times</span>
-            <p>Import</p>
-            <input type="file" id="btreeUpload">
-            <button type="button" id="drawFromFile">Zeichne Baum</button>
-        </div>
+
+</div>
+<div id="importModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times</span>
+        <p>Import</p>
+        <input type="file" id="btreeUpload">
+        <button type="button" id="drawFromFile">Zeichne Baum</button>
     </div>
-    <canvas id="canvaswindow"></canvas>
-    <script src="js/btree.js"></script>
-    <script src="js/canvas.js"></script>
-    </body>
+</div>
+<canvas id="canvaswindow"></canvas>
+<script src="js/btree.js"></script>
+<script src="js/canvas.js"></script>
+<table style=" padding-left: 10px; background-color: #fff; height: 115px; margin-top: -30px; width:100%" >
+    <tr><td>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="logos/licence-logo.png" height="50px" style="float:left"/>
+        </a><br>
+        This work is licensed under a <br>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+    </td>
+        <td>
+            <img src="logos/EILD-Logo.png" alt="EILD-Logo" height="100px"/>
+
+        </td>
+<td>
+    <img src="logos/DH-NRW-Logos.png" alt="DH-NRW-Logo" height="114px" style="float:right" />
+</td>
+<br>
+    </tr>
+
+</table>
+</body>
 </html>

@@ -20,7 +20,7 @@ let drawTreeFromUploadButton = document.getElementById('drawFromFile');
 // set up canvas
 let canvas = document.querySelector('canvas');
 canvas.style.backgroundColor = 'white';
-canvas.height = window.innerHeight - 200;
+canvas.height = window.innerHeight - 315;
 canvas.width = window.innerWidth;
 let c = canvas.getContext('2d');
 
@@ -112,6 +112,14 @@ const expRotateRight = "Der linke Nachbarknoten des gelöschten Wertes besitzt g
 const expRotateLeft = "Der rechte Nachbarknoten des gelöschten Wertes besitzt genug Elemente, um eines zu stehlen. <br> <br> " +
 	"Dafür rotieren wir die markierten Werte nach links.";
 
+// Colors
+const green = "rgba(89, 178, 89,1)";
+const pastelGreen = "rgba(89, 178, 89,0.5)";
+const red = "rgba(255, 0, 0,0.5)";
+const blue = "rgba(0, 117, 175,1)";
+const pastelBlue = "rgba(0, 117, 175,0.5)";
+const yellow = "rgba(255, 255, 0,0.5)";
+
 window.onbeforeunload = function(e) {
 	return "Bei Aktualisieren oder Schließen der Seite wird der aktuelle Baum gelöscht.";
 };
@@ -174,19 +182,19 @@ drawTreeFromUploadButton.addEventListener("click", function() {
 animationSpeedSlider.addEventListener("change", function(){
 	speed = parseInt(animationSpeedSlider.value);
 	if(speed === 1){
-		animationsgeschwindigkeit.innerHTML = "Am langsamsten";
+		animationsgeschwindigkeit.innerHTML = "Animation: Am langsamsten";
 	}else if(speed === 3){
-		animationsgeschwindigkeit.innerHTML = "Langsamer";
+		animationsgeschwindigkeit.innerHTML = "Animation: Langsamer";
 	}else if(speed === 5){
-		animationsgeschwindigkeit.innerHTML = "Langsam";
+		animationsgeschwindigkeit.innerHTML = "Animation: Langsam";
 	}else if(speed === 7){
-		animationsgeschwindigkeit.innerHTML = "Normal";
+		animationsgeschwindigkeit.innerHTML = "Animation: Normal";
 	}else if(speed === 9){
-		animationsgeschwindigkeit.innerHTML = "Schnell";
+		animationsgeschwindigkeit.innerHTML = "Animation: Schnell";
 	}else if(speed === 11){
-		animationsgeschwindigkeit.innerHTML = "Schneller";
+		animationsgeschwindigkeit.innerHTML = "Animation: Schneller";
 	}else if(speed === 13){
-		animationsgeschwindigkeit.innerHTML = "Am schnellsten";
+		animationsgeschwindigkeit.innerHTML = "Animation: Am schnellsten";
 	}
 });
 
@@ -194,6 +202,11 @@ animationCheckbox.addEventListener("change", function(){
 	isAnimationDisabled = !animationCheckbox.checked;
 	if(isAnimationDisabled){
 		explanationText = expAnimationDeactivated;
+		animationsgeschwindigkeit.innerHTML = "Animation: aus";
+		animationSpeedSlider.disabled = true;
+	} else {
+		animationsgeschwindigkeit.innerHTML = "Animation: an";
+		animationSpeedSlider.disabled = false;
 	}
 });
 
@@ -257,7 +270,7 @@ function resumeAnimation(){
 			if (events[0].type === "deleteInLeafNoUnderflow") {
 				if (!nodeCanGetDeletedNow) {
 					resetAnimationStepVariables();
-					tempTree[checkIfNodeIsInArray(tempTree, deletedValue)[1]].color = "rgba(255, 0, 0, 1)";
+					tempTree[checkIfNodeIsInArray(tempTree, deletedValue)[1]].color = red;
 					explanationText = "Das Element '" + deletedValue + "' kann gelöscht werden, da es sich in einem Blatt befindet. <br> <br> " +
 						"Durch das Löschen entsteht kein Underflow, der B-Baum ist weiterhin balanciert.";
 					drawTree(tempTree);
@@ -268,7 +281,7 @@ function resumeAnimation(){
 				}
 			} else if (events[0].type === "deletingLastTreeElement") {
 				if (!nodeCanGetDeletedNow) {
-					oldTree[checkIfNodeIsInArray(oldTree, deletedValue)[1]].color = "rgba(255, 0, 0, 1)";
+					oldTree[checkIfNodeIsInArray(oldTree, deletedValue)[1]].color = red;
 					explanationText = "Das Element '" + deletedValue + "' ist das letzte Element im B-Baum und kann daher direkt entfernt werden.";
 					drawTree(oldTree);
 					nodeCanGetDeletedNow = true;
@@ -296,8 +309,8 @@ function resumeAnimation(){
 					resetAnimationStepVariables();
 					explanationText = "Das Element muss sich in einem Blatt befinden, um gelöscht zu werden. <br> <br> " +
 						"Dafür wird das Element '" + deletedValue + "' mit dem größten Element des kleineren Teilbaumes (in diesem Fall '" + eventValues[0] + "') getauscht.";
-					tempTree[eventValueIndex].color = "rgba(255, 255, 0, 1)";
-					tempTree[deletedValueIndex].color = "rgba(255, 255, 0, 1)";
+					tempTree[eventValueIndex].color = yellow;
+					tempTree[deletedValueIndex].color = yellow;
 					let bufferX = tempTree[eventValueIndex].destination_x;
 					let bufferY = tempTree[eventValueIndex].destination_y;
 					let bufferChild = JSON.parse(JSON.stringify(tempTree[eventValueIndex].children));
@@ -328,8 +341,8 @@ function resumeAnimation(){
 					isItSwapped = true;
 					animationId = requestAnimationFrame(drawSwapWithLowerValue);
 				} else if (animationStepComplete && !nodeCanGetDeletedNow) {
-					tempTree[eventValueIndex].color = "rgba(0, 0, 255, 0.2)";
-					tempTree[deletedValueIndex].color = "rgba(255, 0, 0, 1)";
+					tempTree[eventValueIndex].color = pastelBlue;
+					tempTree[deletedValueIndex].color = red;
 					explanationText = "Das Element '" + deletedValue + "' kann nun gelöscht werden.";
 					nodeCanGetDeletedNow = true;
 					connectLines(tempTree);
@@ -359,7 +372,7 @@ function resumeAnimation(){
 					for (let i = 0; i < eventValues[0].length; i++) {
 						for (let j = 0; j < eventValues[0][i].length; j++) {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
-							tempTree[index].color = "rgba(0, 255, 0, 1)";
+							tempTree[index].color = green;
 						}
 					}
 					tempTree.splice(checkIfNodeIsInArray(tempTree, deletedValue)[1], 1);
@@ -389,7 +402,7 @@ function resumeAnimation(){
 					for (let i = 0; i < eventValues[0].length; i++) {
 						for (let j = 0; j < eventValues[0][i].length; j++) {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
-							tempTree[index].color = "rgba(0, 255, 0, 1)";
+							tempTree[index].color = green;
 						}
 
 					}
@@ -422,7 +435,7 @@ function resumeAnimation(){
 					for (let i = 0; i < eventValues[0].length; i++) {
 						for (let j = 0; j < eventValues[0][i].length; j++) {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
-							tempTree[index].color = "rgba(0, 255, 0, 1)";
+							tempTree[index].color = green;
 						}
 					}
 					connectLines(tempTree);
@@ -462,7 +475,7 @@ function resumeAnimation(){
 					for (let i = 0; i < eventValues[0].length; i++) {
 						for (let j = 0; j < eventValues[0][i].length; j++) {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
-							tempTree[index].color = "rgba(0, 255, 0, 1)";
+							tempTree[index].color = green;
 						}
 					}
 					connectLines(tempTree);
@@ -508,11 +521,11 @@ function resumeAnimation(){
 						if (typeof eventValues[0][i] === "object") {
 							for (let j = 0; j < eventValues[0][i].length; j++) {
 								let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
-								tempTree[index].color = "rgba(0, 255, 0, 1)";
+								tempTree[index].color = green;
 							}
 						} else {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i])[1];
-							tempTree[index].color = "rgba(0, 255, 0, 1)";
+							tempTree[index].color = green;
 						}
 					}
 					drawTreeWithTempLines(tempTree);
@@ -556,11 +569,11 @@ function resumeAnimation(){
 						if (typeof eventValues[0][i] === "object") {
 							for (let j = 0; j < eventValues[0][i].length; j++) {
 								let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
-								tempTree[index].color = "rgba(0, 255, 0, 1)";
+								tempTree[index].color = green;
 							}
 						} else {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i])[1];
-							tempTree[index].color = "rgba(0, 255, 0, 1)";
+							tempTree[index].color = green;
 						}
 					}
 					connectLines(tempTree);
@@ -604,11 +617,11 @@ function resumeAnimation(){
 						if (typeof eventValues[0][i] === "object") {
 							for (let j = 0; j < eventValues[0][i].length; j++) {
 								let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
-								tempTree[index].color = "rgba(0, 255, 0, 1)";
+								tempTree[index].color = green;
 							}
 						} else {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i])[1];
-							tempTree[index].color = "rgba(0, 255, 0, 1)";
+							tempTree[index].color = green;
 						}
 					}
 					connectLines(tempTree);
@@ -662,11 +675,11 @@ function resumeAnimation(){
 						if (typeof eventValues[0][i] === "object") {
 							for (let j = 0; j < eventValues[0][i].length; j++) {
 								let index = checkIfNodeIsInArray(tempTree, eventValues[0][i][j])[1];
-								tempTree[index].color = "rgba(0, 255, 0, 1)";
+								tempTree[index].color = green;
 							}
 						} else {
 							let index = checkIfNodeIsInArray(tempTree, eventValues[0][i])[1];
-							tempTree[index].color = "rgba(0, 255, 0, 1)";
+							tempTree[index].color = green;
 						}
 					}
 					connectLines(tempTree);
@@ -723,7 +736,7 @@ function updateDrawnTree(nodes){
 
 function resetColorOfTreeNodes(tree){
 	for(let i=0; i < tree.length; i++){
-		tree[i].color = "rgba(0, 0, 255, 0.2)";
+		tree[i].color = pastelBlue;
 	}
 }
 
@@ -902,7 +915,7 @@ function inputInsert(inputInsertValue){
 				drawTree(oldTree);
 				insertNode = null;
 				getBTree(y);
-				drawRectangle(explanationBoxWidth / 2 - rectangleWidth / 2,y,rectangleWidth,rectangleHeight,input, 'rgba(0, 0, 255, 0.2)');
+				drawRectangle(explanationBoxWidth / 2 - rectangleWidth / 2,y,rectangleWidth,rectangleHeight,input, pastelBlue);
 				pauseAnimation();
 				inputButton.textContent = ">";
 			}else{
@@ -958,7 +971,7 @@ function inputDelete(inputDeleteValue){
 			explanationText = "Das Element '" + deleteValue + "' wird aus dem Baum gelöscht.";
 			animationComplete = false;
 			drawTree(oldTree);
-			drawRectangle(oldTree[index].x, oldTree[index].y, rectangleWidth, rectangleHeight, deleteValue, 'rgba(255, 0, 0, 1)');
+			drawRectangle(oldTree[index].x, oldTree[index].y, rectangleWidth, rectangleHeight, deleteValue, red);
 			deleteNodeInArray(deleteValue);
 			if (treeType * 2 - 1 === drawnTree.length) {
 				deletedSecondElement = true;
@@ -1067,8 +1080,8 @@ function checkDeleteValue(deleteValue){
 function bufferTree(tree){
 	oldTree = [];
 	for(let i=0; tree.length > i; i++){
-		let node = new CanvasNode(tree[i].x,tree[i].y,tree[i].destination_x,tree[i].destination_y, "rgba(0, 0, 255, 0.2)");
-		tree[i].color = "rgba(0, 0, 255, 0.2)";
+		let node = new CanvasNode(tree[i].x,tree[i].y,tree[i].destination_x,tree[i].destination_y, pastelBlue);
+		tree[i].color = pastelBlue;
 		node.insertKey(tree[i].key);
 		if(tree[i].children){
 			node.insertChildren(JSON.parse(JSON.stringify(tree[i].children)));
@@ -1080,8 +1093,8 @@ function bufferTree(tree){
 function copyTree(tree){
 	tempTree = [];
 	for(let i=0; tree.length > i; i++){
-		let node = new CanvasNode(tree[i].x,tree[i].y,tree[i].destination_x,tree[i].destination_y, "rgba(0, 0, 255, 0.2)");
-		tree[i].color = "rgba(0, 0, 255, 0.2)";
+		let node = new CanvasNode(tree[i].x,tree[i].y,tree[i].destination_x,tree[i].destination_y, pastelBlue);
+		tree[i].color = pastelBlue;
 		node.insertKey(tree[i].key);
 		if(tree[i].children){
 			node.insertChildren(JSON.parse(JSON.stringify(tree[i].children)));
@@ -1326,7 +1339,7 @@ function insertDraw(){
 		}
 		iterateTroughTreeAndDraw(oldTree);
 		moveInsertNodeToDestX();
-		drawRectangle(insertNode.x,insertNode.y,rectangleWidth,rectangleHeight,insertNode.key,'rgba(0, 0, 255, 0.2)');
+		drawRectangle(insertNode.x,insertNode.y,rectangleWidth,rectangleHeight,insertNode.key,pastelBlue);
 		animationId = window.requestAnimationFrame(insertDraw);
 	}else{
 		for(let i = 0; i < events.length; i++){
@@ -1335,8 +1348,8 @@ function insertDraw(){
 				for(let j = 0; j < events[i].values.length; j++){
 					let index = checkIfNodeIsInArray(oldTree,events[i].values[j])[1];
 					console.log("einfärben");
-					oldTree[index].color = 'rgba(0,255,0,0.2)';
-					drawnTree[checkIfNodeIsInArray(drawnTree,events[i].values[j])[1]].color = 'rgba(0, 255, 0, 0.2)';
+					oldTree[index].color = pastelGreen;
+					drawnTree[checkIfNodeIsInArray(drawnTree,events[i].values[j])[1]].color = pastelGreen;
 					c.clearRect(oldTree[index].x,oldTree[index].y,rectangleWidth,rectangleHeight);
 					drawRectangle(oldTree[index].x, oldTree[index].y, rectangleWidth, rectangleHeight,oldTree[index].key,oldTree[index].color);
 				}
@@ -1454,19 +1467,19 @@ function pushNodeInArray(node, key, childrenKeys, tree){
 			}
 		}else{
 			if(key){
-				let newNode = new CanvasNode(node.x, node.y, node.destination_x, node.y, "rgba(0, 0, 255, 0.2)");
+				let newNode = new CanvasNode(node.x, node.y, node.destination_x, node.y, pastelBlue);
 				newNode.insertKey(key);
 				tree.push(newNode);
 				if(childrenKeys.length > 0){
 					newNode.insertChildren(childrenKeys);
 				}
-				let anotherNode = new CanvasNode(node.x, node.y, node.destination_x, node.destination_y, "rgba(0, 0, 255, 0.2)");
+				let anotherNode = new CanvasNode(node.x, node.y, node.destination_x, node.destination_y, pastelBlue);
 				anotherNode.insertKey(key);
 				insertNode = anotherNode;
 			}
 		}
 	}else{
-		let newNode = new CanvasNode(node.destination_x, node.destination_y, node.destination_x, node.destination_y, "rgba(0, 0, 255, 0.2)");
+		let newNode = new CanvasNode(node.destination_x, node.destination_y, node.destination_x, node.destination_y, pastelBlue);
 		newNode.insertKey(key);
 		newNode.insertChildren(childrenKeys);
 		tree.push(newNode);
@@ -1547,7 +1560,7 @@ function getBTree(yValue){
 		let borderSpace = canvas.width - widthOfAllNodes;
 		borderSpace = borderSpace / 2;
 		x = xCentral;
-		let node = new CanvasNode(explanationBoxWidth / 2 - rectangleWidth / 2,yValue,x,y, "rgba(0, 0, 255, 0.2)");
+		let node = new CanvasNode(explanationBoxWidth / 2 - rectangleWidth / 2,yValue,x,y, pastelBlue);
 		for(let j=0; j < levelsArray[i].length; j++){
 			if(!levelsArray[i][j].isLeaf()){
 				let differenz = levelsArray[i][j].children[levelsArray[i][j].children.length-1].x + (levelsArray[i][j].children[levelsArray[i][j].children.length-1].keys.length * rectangleWidth) - levelsArray[i][j].children[0].x;
@@ -1597,7 +1610,7 @@ function getBTree(yValue){
 function calculateWrapTextAndDraw(text, x, y, width, lineHeight, fillStyle) {
 	c.clearRect(11, 11, width, explanationBoxHeight);
 	c.font = "16px Roboto";
-	c.fillStyle = "#b5e396";
+	c.fillStyle = "#98c1d5"
 	c.fillRect(explanationBoxX, explanationBoxY, width + 10, explanationBoxHeight);
 	c.strokeRect(11,11, width + 10, explanationBoxHeight);
 	let words = text.split(' ');
@@ -1625,7 +1638,7 @@ function calculateWrapTextAndDraw(text, x, y, width, lineHeight, fillStyle) {
 }
 
 function resizeCanvas(){
-	canvas.height = window.innerHeight - 200;
+	canvas.height = window.innerHeight - 315;
 	canvas.width = window.innerWidth;
 
 	explanationBoxWidth = canvas.width * 0.2 > 300 ? canvas.width * 0.2 : 300;
