@@ -16,30 +16,60 @@
 <div class="form" id="firstRowInput">
     <div>
         <div class="form-inputs">
-            <input type="text" id="treeInputInsert" maxlength="10">
-            <button type="button" id="submitInsert">Einfügen</button>
-            <button type="button" id="submitDelete">Löschen</button>
-            <button type="button" id="animationPause">||</button>
-            <p class="tooltip fade-in">Animation pausieren</p>
+            <span class="tooltip">
+                <input type="text" id="treeInputInsert" maxlength="8">
+                <span class="tooltiptext" id="tooltipInsert" style="width: 160px">Hier Wert eingeben</span>
+            </span>
+            <span class="tooltip">
+                <button type="button" id="submitInsert">Einfügen</button>
+                <span class="tooltiptext" id="tooltipInsert" style="width: 160px">Wert einfügen</span>
+            </span>
+            <span class="tooltip">
+                <button type="button" id="submitDelete">Löschen</button>
+                 <span class="tooltiptext" id="tooltipDelete" style="width: 160px">Wert löschen</span>
+            </span>
+            <span class="tooltip">
+                <button type="button" id="animationPause">||</button>
+                <span class="tooltiptext" style="width: 160px">Animation pausieren</span>
+            </span>
             <button type="button" id="submitReset">Neuer Baum</button>
             <button type="button" id="importButton">Import</button>
             <button type="button" id="helpButton">Hilfe</button>
         </div>
         <form class="form-radio">
 
-            <label for="treeInputInsert"></label>
-            <label>Typ des Baumes:</label>
-            <input type="radio" id="treeType1" checked="checked" value="1" name="treeType">
-            <label for="treeType2">1</label>
-            <input type="radio" id="treeType2" value="2" name="treeType">
-            <label for="treeType3">2</label>
-            <input type="radio" id="treeType3" value="3" name="treeType">
-            <label for="treeType4">3</label>
-            <input type="radio" id="treeType4" value="4" name="treeType">
-            <label for="treeType5">4</label>
-            <input type="radio" id="treeType5" value="5" name="treeType">
-            <label for="treeType1">5</label>
-            <button type="button" id="changeType" style="margin-left: 10px">Ändern</button>
+            <span class="tooltip">
+                <label for="treeInputInsert"></label>
+                <label style="font-weight: bold">Typ des Baumes:</label>
+                <span class="tooltiptext" style="width: 330px"> Gibt die Anzahl an Elementen pro Knoten an</span>
+            </span>
+            <span class="tooltip">
+                <input type="radio" id="treeType1" checked="checked" value="1" name="treeType">
+                <label for="treeType2">1</label>
+                <span class="tooltiptext" style="width: 180px"> 2 Elemente pro Knoten</span>
+            </span>
+            <span class="tooltip">
+                <input type="radio" id="treeType2" value="2" name="treeType">
+                <label for="treeType3">2</label>
+                <span class="tooltiptext" style="width: 180px"> 4 Elemente pro Knoten</span>
+            </span>
+            <span class="tooltip">
+                <input type="radio" id="treeType3" value="3" name="treeType">
+                <label for="treeType4">3</label>
+                <span class="tooltiptext" style="width: 180px"> 6 Elemente pro Knoten</span>
+            </span>
+            <span class="tooltip">
+                <input type="radio" id="treeType4" value="4" name="treeType">
+                <label for="treeType5">4</label>
+                <span class="tooltiptext" style="width: 180px"> 8 Elemente pro Knoten</span>
+            </span>
+            <span class="tooltip">
+                <input type="radio" id="treeType5" value="5" name="treeType">
+                <label for="treeType1">5</label>
+                <span class="tooltiptext" style="width: 180px"> 10 Elemente pro Knoten</span>
+            </span>
+
+                <button type="button" id="changeType" style="margin-left: 10px">Ändern</button>
         </form>
     </div>
     <div class="form-animation">
@@ -58,14 +88,16 @@
     <div class="modal-content">
         <span class="close-button">&times</span>
         <p>Import</p>
-        <input type="file" id="btreeUpload">
+        <input id="btreeUpload" type="file">
+
         <button type="button" id="drawFromFile">Zeichne Baum</button>
     </div>
 </div>
+
 <canvas id="canvaswindow"></canvas>
 <script src="js/btree.js"></script>
 <script src="js/canvas.js"></script>
-<table style=" padding-left: 10px; background-color: #fff; height: 115px; margin-top: -30px; width:100%" >
+<table>
     <tr><td>
         <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
             <img alt="Creative Commons License" style="border-width:0" src="logos/licence-logo.png" height="50px" style="float:left"/>

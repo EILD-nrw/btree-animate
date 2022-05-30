@@ -96,8 +96,10 @@ const expHelp = "Die Anwendung soll die Schritte beim Aufbau eines B-Baums visua
 	"Um ein Element zu löschen, muss es mit einem - versehen sein. <br> " +
 	"Ein gültiges Beispiel wäre: 3, 2, 7, 9, 10, -7, -10, -3, 5 <br> <br> " +
 	"Eine korrekte Einordnung der Elemente kann bei einem Baum des Typs 1 für die Tiefe 5 (bei Zahlen) bzw. 4 (bei Wörtern) garantiert werden. <br> " +
-	"Bei größeren Typen verringert sich die Tiefe. <br> <br> " +
-	"Bei der Eingabe von Umlauten werden diese in ihre äquivalente Form nach DIN 5007 Variante 2 zur Sortierung von Namenslisten umgewandelt (z.B. Ä zu AE)."
+	"Bei größeren Typen verringert sich diese Tiefe. <br> <br> " +
+	"Bei der Eingabe von Umlauten werden diese in ihre äquivalente Form nach DIN 5007 Variante 2 zur Sortierung von Namenslisten umgewandelt (z.B. Ä zu AE). <br> " +
+	"Durch die Umwandlung wird das eingegebene Wort länger, weshalb es bei mehr als zwei Umlauten die Ausmaße der Box überschreiten kann."
+
 
 const expAnimationDeactivated = "Animationen sind deaktiviert. Bei Bedarf können sie mit einem Haken bei 'Animation: aus' wieder aktiviert werden.";
 
@@ -908,7 +910,7 @@ function inputInsert(inputInsertValue){
 				input = parseInt(input);
 			}else{
 				input = input.toUpperCase();
-				input = input.replace("Ä", "AE").replace("Ö", "OE").replace("Ü", "UE");
+				input = input.replaceAll("Ä", "AE").replaceAll("Ö", "OE").replaceAll("Ü", "UE");
 			}
 			tree.eventList = [];
 			splitcounter = 0;
@@ -956,7 +958,7 @@ function inputDelete(inputDeleteValue){
 		deleteValue = parseInt(deleteValue);
 	}else{
 		deleteValue = deleteValue.toUpperCase();
-		deleteValue = deleteValue.replace("Ä", "AE").replace("Ö", "OE").replace("Ü", "UE");
+		deleteValue = deleteValue.replaceAll("Ä", "AE").replaceAll("Ö", "OE").replaceAll("Ü", "UE");
 	}
 	if(checkDeleteValue(deleteValue)){
 		c.clearRect(0, 0, canvas.width, canvas.height);
@@ -1276,9 +1278,8 @@ function drawReassembledTree(){
 				pauseAnimation();
 			}else{
 				oldLineCoordinatesXY = lineCoordinatesXY;
-				activateButton(resetButton);
 				inputButton.textContent = "Einfügen";
-				inputDeleteButton.textContent = "Löschen1";
+				inputDeleteButton.textContent = "Löschen";
 				disableButton(animationPauseButton);
 				explanationText = expAnimationDone;
 				calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
@@ -1286,6 +1287,7 @@ function drawReassembledTree(){
 				animationStepComplete = false;
 				bufferTree(drawnTree);
 				drawTree(drawnTree);
+				activateButton(resetButton);
 				cancelAnimationFrame(animationId);
 				if(treeIsDrawnFromUpload){
 					drawTreeFromUpload();
