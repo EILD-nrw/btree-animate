@@ -128,6 +128,18 @@ canvas {
 	margin-left: 20px;
 }
 
+a:link, a:visited{
+	color: #006699;
+}
+
+a:hover {
+	color: #336633;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	accent-color: #00324c;
+}
+
 .tooltip{
 	display:none;
 	padding: 3px;
