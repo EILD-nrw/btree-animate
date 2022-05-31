@@ -87,7 +87,9 @@ let updatedNodes = [];
 
 const expInit = "Herzlich willkommen beim B-Baum-Animator! <br> <br> " +
 	"Diese Animation dient dazu, die Vorgehensweise beim geordneten Einfügen und Löschen von Werten im B-Baum darzustellen. <br> <br> " +
-	"Geben Sie dazu den Wert in die Zeile ein und klicken auf 'Einfügen' oder auf 'Löschen', um einen bereits eingefügten Wert wieder zu entfernen. <br> <br> " +
+	"Geben Sie dazu den Wert in die Zeile ein und klicken auf 'Einfügen' (oder betätigen die 'Enter'-Taste), um einen Wert einzufügen. <br> <br> " +
+	"Mit einem Klick auf 'Löschen' (oder Betätigung der 'Entfernen'-Taste) können Sie einen bereits eingefügten Wert wieder entfernen. <br> <br> " +
+	"" +
 	"Anschließend wird der Ablauf schrittweise animiert und erklärt.";
 
 const expHelp = "Die Anwendung soll die Schritte beim Aufbau eines B-Baums visualisieren <br> " +
@@ -127,25 +129,45 @@ window.onbeforeunload = function(e) {
 	return "Bei Aktualisieren oder Schließen der Seite wird der aktuelle Baum gelöscht.";
 };
 
+var elem = document.querySelector('body'),
+	text = '';
+elem.addEventListener("keydown", keyPressed );
+
+function keyPressed (evt) {
+	if (evt.key == "Enter"){
+		insertValue();
+	} else if(evt.key == "Delete"){
+		deleteValue();
+	}
+}
+
 inputButton.addEventListener('click', function(){
+	insertValue();
+});
+
+function insertValue(){
 	let input = textFieldInput.value;
 	if (inputButton.textContent == ">"){
 		resumeAnimation();
 	} else {
 		inputInsert(input);
 	}
-});
+}
+function deleteValue(){
+	let input = textFieldInput.value;
+	if (inputDeleteButton.textContent == ">"){
+		resumeAnimation();
+	} else {
+		inputDelete(input);
+	}
+}
 
 window.addEventListener('resize', resizeCanvas, false);
 
 inputDeleteButton.addEventListener('click', function(){
-	let deleteValue = textFieldInput.value;
-	if (inputDeleteButton.textContent == ">"){
-		resumeAnimation();
-	} else {
-		inputDelete(deleteValue);
-	}
+	deleteValue();
 });
+
 
 resetButton.addEventListener('click', function(){
 	if (confirm("Soll der aktuelle Baum wirklich gelöscht werden?")) {
