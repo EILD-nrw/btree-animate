@@ -16,6 +16,9 @@ let animationsgeschwindigkeit = document.getElementById("animationsgeschwindigke
 let animationCheckbox = document.getElementById("animationCheckbox");
 let fileUpload = document.getElementById('btreeUpload');
 let drawTreeFromUploadButton = document.getElementById('drawFromFile');
+let insertTooltip = document.getElementById('tooltipInsert');
+let deleteTooltip = document.getElementById('tooltipDelete');
+let animationTooltip = document.getElementById('tooltipAnimation');
 
 // set up canvas
 let canvas = document.querySelector('canvas');
@@ -85,8 +88,7 @@ let updatedNodes = [];
 const expInit = "Herzlich willkommen beim B-Baum-Animator! <br> <br> " +
 	"Diese Animation dient dazu, die Vorgehensweise beim geordneten Einfügen und Löschen von Werten im B-Baum darzustellen. <br> <br> " +
 	"Geben Sie dazu den Wert in die Zeile ein und klicken auf 'Einfügen' oder auf 'Löschen', um einen bereits eingefügten Wert wieder zu entfernen. <br> <br> " +
-	"Anschließend wird der Ablauf schrittweise animiert und erklärt. <br> <br> " +
-	"Für weitere Informationen, klicken Sie auf 'Hilfe'.";
+	"Anschließend wird der Ablauf schrittweise animiert und erklärt.";
 
 const expHelp = "Die Anwendung soll die Schritte beim Aufbau eines B-Baums visualisieren <br> " +
 	"Dabei wird jeder Schritt einzeln animiert und erklärt. <br> " +
@@ -146,7 +148,7 @@ inputDeleteButton.addEventListener('click', function(){
 });
 
 resetButton.addEventListener('click', function(){
-	if (confirm("Um einen neuen Baum zu erstellen, wird der aktuelle Baum gelöscht.")) {
+	if (confirm("Soll der aktuelle Baum wirklich gelöscht werden?")) {
 		resetTree();
 	}
 });
@@ -211,9 +213,11 @@ animationCheckbox.addEventListener("change", function(){
 		explanationText = expAnimationDeactivated;
 		animationsgeschwindigkeit.innerHTML = "Animation: aus";
 		animationSpeedSlider.disabled = true;
+		animationTooltip.innerHTML = "Animation aktivieren";
 	} else {
 		animationsgeschwindigkeit.innerHTML = "Animation: an";
 		animationSpeedSlider.disabled = false;
+		animationTooltip.innerHTML = "Animation deaktivieren";
 	}
 });
 
@@ -258,6 +262,14 @@ function pauseAnimation(){
 	cancelAnimationFrame(animationId);
 }
 
+function changeButtonsToStart(){
+	activateButton(resetButton);
+	inputButton.textContent = "Einfügen";
+	inputDeleteButton.textContent = "Löschen";
+	insertTooltip.innerHTML = "Wert einfügen";
+	deleteTooltip.innerHTML = "Wert löschen";
+}
+
 function resumeAnimation(){
 	pause = false;
 	activateButton(animationPauseButton);
@@ -299,9 +311,7 @@ function resumeAnimation(){
 					events.splice(0, 1);
 					bufferTree(drawnTree);
 					drawTree(drawnTree);
-					activateButton(resetButton);
-					inputButton.textContent = "Einfügen";
-					inputDeleteButton.textContent = "Löschen";
+					changeButtonsToStart()
 					nodeCanGetDeletedNow = false;
 				}
 			} else if (events[0].type === "swapWithNextLowerValue") {
@@ -925,6 +935,7 @@ function inputInsert(inputInsertValue){
 				drawRectangle(explanationBoxWidth / 2 - rectangleWidth / 2,y,rectangleWidth,rectangleHeight,input, pastelBlue);
 				pauseAnimation();
 				inputButton.textContent = ">";
+				insertTooltip.innerHTML = "Animation fortsetzen";
 			}else{
 				explanationText = expAnimationDeactivated;
 				drawnTree = [];
@@ -987,6 +998,7 @@ function inputDelete(inputDeleteValue){
 			getBTree(y);
 			pauseAnimation();
 			inputDeleteButton.textContent = ">";
+			deleteTooltip.innerHTML = "Animation fortsetzen";
 		}else{
 			explanationText = expAnimationDeactivated;
 			drawnTree = [];
@@ -1230,9 +1242,7 @@ function drawStepTwo(){
 		bufferTree(drawnTree);
 		drawTree(drawnTree);
 		window.cancelAnimationFrame(animationId);
-		activateButton(resetButton);
-		inputButton.textContent = "Einfügen";
-		inputDeleteButton.textContent = "Löschen"
+		changeButtonsToStart()
 		disableButton(animationPauseButton);
 		if(treeIsDrawnFromUpload){
 			drawTreeFromUpload();
@@ -1278,8 +1288,6 @@ function drawReassembledTree(){
 				pauseAnimation();
 			}else{
 				oldLineCoordinatesXY = lineCoordinatesXY;
-				inputButton.textContent = "Einfügen";
-				inputDeleteButton.textContent = "Löschen";
 				disableButton(animationPauseButton);
 				explanationText = expAnimationDone;
 				calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
@@ -1287,7 +1295,7 @@ function drawReassembledTree(){
 				animationStepComplete = false;
 				bufferTree(drawnTree);
 				drawTree(drawnTree);
-				activateButton(resetButton);
+				changeButtonsToStart()
 				cancelAnimationFrame(animationId);
 				if(treeIsDrawnFromUpload){
 					drawTreeFromUpload();
