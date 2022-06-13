@@ -902,6 +902,7 @@ function drawTreeFromUpload(){
 			if(uploadValues[0].charAt(0) == '-'){
 				inputDelete(uploadValues[0].substring(1));
 			}else{
+				changeButtonsToStart();
 				inputInsert(uploadValues[0]);
 			}
 			uploadValues.shift();
