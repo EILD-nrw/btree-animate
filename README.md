@@ -12,7 +12,7 @@ In EILD wird ein Ansatz mit weitgehender Adaptierbarkeit und Wiederverwendbarkei
 
 ## Verwendung
 
-Verwenden Sie am besten die [auf GitHub bereitgestellten Version](https://eild-nrw.github.io/b-tree/). Diese wird bei Änderungen regelmäßig Aktualisiert und muss nicht selbst betrieben werden.
+Verwenden Sie am besten die [auf GitHub bereitgestellten Version](https://eild-nrw.github.io/btree-animate/). Diese wird bei Änderungen regelmäßig Aktualisiert und muss nicht selbst betrieben werden.
 
 ## Lizenz
 [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
