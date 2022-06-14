@@ -1,5 +1,4 @@
 
-
 let textFieldInput = document.getElementById("treeInputInsert");
 let inputButton = document.getElementById("submitInsert");
 let inputDeleteButton = document.getElementById("submitDelete");
@@ -53,6 +52,8 @@ let treeType = 1;
 let tree = new Tree(treeType);
 
 //animation variables
+animationCheckbox.checked = true;
+animationSpeedSlider.value = 7;
 let speed = 7;
 let pause = false;
 deactivateButton(animationPauseButton);
