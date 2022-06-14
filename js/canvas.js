@@ -173,7 +173,19 @@ undoButton.addEventListener('click', function(){
 	undoStep();
 });
 function undoStep(){
-}
+	//TODO undoStep
+	insertedValues.pop();
+	let values = Object.values(insertedValues);
+	resetTree();
+	uploadValues = Object.values(values);
+	console.log("Rückgängig auf: " + uploadValues);
+	if (!isAnimationDisabled){
+		isAnimationDisabled = true;
+		drawTreeFromUpload();
+		isAnimationDisabled = false;
+	} else {
+		drawTreeFromUpload();
+	}
 }
 window.addEventListener('resize', resizeCanvas, false);
 
@@ -902,6 +914,7 @@ function drawSwapWithLowerValue(){
 }
 
 function drawTreeFromUpload(){
+	//TODO TreeFromUpload
 	if(!isAnimationDisabled){
 		if(uploadValues.length > 0){
 			treeIsDrawnFromUpload = true;
@@ -921,12 +934,14 @@ function drawTreeFromUpload(){
 	}else{
 		treeIsDrawnFromUpload = false;
 		for(let i = 0; i<uploadValues.length; i++){
+			console.log("in der for-schleife");
 			if(uploadValues[i].charAt(0) == ' '){
 				uploadValues[i] = uploadValues[i].substring(1);
 			}
 			if(uploadValues[i].charAt(0) === '-'){
 				inputDelete(uploadValues[i].substring(1));
 			}else{
+				console.log("Wert einfügen: " + uploadValues[i]);
 				inputInsert(uploadValues[i]);
 			}
 		}
@@ -954,6 +969,9 @@ function inputInsert(inputInsertValue){
 				input = input.toUpperCase();
 				input = input.replaceAll("Ä", "AE").replaceAll("Ö", "OE").replaceAll("Ü", "UE");
 			}
+			//TODO insert value
+			insertedValues.push(input.toString());
+			console.log("Inserted Values insert: "+insertedValues);
 			tree.eventList = [];
 			splitcounter = 0;
 			tree.insertKey(input);
@@ -1007,6 +1025,9 @@ function inputDelete(inputDeleteValue){
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		let y = Math.round(((explanationBoxHeight) / 100) * 3);
 		c.font = "16px Roboto";
+		//TODO delete value
+		insertedValues.push('-' + deleteValue.toString());
+		console.log("Inserted Values Delete: " + insertedValues);
 		tree.eventList = [];
 		resetAnimationStepVariables();
 		splitcounter = 0;
@@ -1394,7 +1415,6 @@ function insertDraw(){
 				splitcounter++;
 				for(let j = 0; j < events[i].values.length; j++){
 					let index = checkIfNodeIsInArray(oldTree,events[i].values[j])[1];
-					console.log("einfärben");
 					oldTree[index].color = pastelGreen;
 					drawnTree[checkIfNodeIsInArray(drawnTree,events[i].values[j])[1]].color = pastelGreen;
 					c.clearRect(oldTree[index].x,oldTree[index].y,rectangleWidth,rectangleHeight);
@@ -1455,6 +1475,7 @@ function resetTree(){
 	animationComplete = true;
 	drawnTree = [];
 	uploadValues = [];
+	insertedValues = [];
 	rectangleWidth = 55;
 	oldTree = [];
 	isDeleting = false;
