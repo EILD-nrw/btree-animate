@@ -55,7 +55,7 @@ let tree = new Tree(treeType);
 //animation variables
 let speed = 7;
 let pause = false;
-disableButton(animationPauseButton);
+deactivateButton(animationPauseButton);
 let animationId = null;
 let oldTree = [];
 let tempTree = [];
@@ -173,7 +173,6 @@ undoButton.addEventListener('click', function(){
 	undoStep();
 });
 function undoStep(){
-	//TODO undoStep
 	insertedValues.pop();
 	let values = Object.values(insertedValues);
 	resetTree();
@@ -268,7 +267,7 @@ importButton.onclick = function(){
 	if(fileUpload.files[0]){
 		activateButton(drawTreeFromUploadButton);
 	}else{
-		disableButton(drawTreeFromUploadButton);
+		deactivateButton(drawTreeFromUploadButton);
 	}
 	modal.style.display = "block";
 }
@@ -287,10 +286,23 @@ window.onclick = function(event){
 	}
 }
 
-function disableButton(button){
+function deactivateButton(button){
 	button.disabled = true;
 	button.style.opacity = '0.5';
 	button.style.cursor = 'auto';
+}
+
+function deactivateAllButtons(process){
+	deactivateButton(resetButton);
+	deactivateButton(undoButton);
+	switch (process ) {
+	case "delete":
+		deactivateButton(inputButton);
+		break;
+	case "insert":
+		deactivateButton(inputDeleteButton);
+		break
+	}
 }
 
 function activateButton(button){
@@ -299,14 +311,21 @@ function activateButton(button){
 	button.style.cursor = 'pointer';
 }
 
+function activateAllButtons(){
+	activateButton(resetButton);
+	activateButton(undoButton);
+	activateButton(inputButton);
+	activateButton(inputDeleteButton);
+}
+
 function pauseAnimation(){
 	pause = true;
-	disableButton(animationPauseButton);
+	deactivateButton(animationPauseButton);
 	cancelAnimationFrame(animationId);
 }
 
 function changeButtonsToStart(){
-	activateButton(resetButton);
+	activateAllButtons();
 	inputButton.textContent = "Einfügen";
 	inputDeleteButton.textContent = "Löschen";
 	insertTooltip.innerHTML = "Wert einfügen";
@@ -350,7 +369,7 @@ function resumeAnimation(){
 					pauseAnimation();
 				} else if (nodeCanGetDeletedNow) {
 					explanationText = expAnimationDone;
-					disableButton(animationPauseButton);
+					deactivateButton(animationPauseButton);
 					events.splice(0, 1);
 					bufferTree(drawnTree);
 					drawTree(drawnTree);
@@ -819,13 +838,12 @@ function drawRotation(){
 		if(!pause){
 			activateButton(animationPauseButton);
 		}
-		disableButton(resetButton);
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 		iterateTroughTreeAndDraw(tempTree);
 		animationId = window.requestAnimationFrame(drawRotation);
 	}else {
-		disableButton(animationPauseButton);
+		deactivateButton(animationPauseButton);
 		animationStepComplete = true;
 		events.splice(0, 1);
 		if(events.length > 0){
@@ -860,13 +878,12 @@ function drawMerge(){
 		if(!pause){
 			activateButton(animationPauseButton);
 		}
-		disableButton(resetButton);
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 		iterateTroughTreeAndDraw(tempTree);
 		animationId = window.requestAnimationFrame(drawMerge);
 	}else {
-		disableButton(animationPauseButton);
+		deactivateButton(animationPauseButton);
 		animationStepComplete = true;
 		events.splice(0, 1);
 		if(events.length > 0){
@@ -896,14 +913,13 @@ function drawSwapWithLowerValue(){
 		if(!pause){
 			activateButton(animationPauseButton);
 		}
-		disableButton(resetButton);
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 		iterateTroughTreeAndDraw(tempTree);
 		animationId = window.requestAnimationFrame(drawSwapWithLowerValue);
 	}else {
 		drawLines(oldLineCoordinatesXY);
-		disableButton(animationPauseButton);
+		deactivateButton(animationPauseButton);
 		animationStepComplete = true;
 		calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 		let index = checkIfNodeIsInArray(drawnTree,swappedValue)[1];
@@ -914,7 +930,6 @@ function drawSwapWithLowerValue(){
 }
 
 function drawTreeFromUpload(){
-	//TODO TreeFromUpload
 	if(!isAnimationDisabled){
 		if(uploadValues.length > 0){
 			treeIsDrawnFromUpload = true;
@@ -969,7 +984,6 @@ function inputInsert(inputInsertValue){
 				input = input.toUpperCase();
 				input = input.replaceAll("Ä", "AE").replaceAll("Ö", "OE").replaceAll("Ü", "UE");
 			}
-			//TODO insert value
 			insertedValues.push(input.toString());
 			console.log("Inserted Values insert: "+insertedValues);
 			tree.eventList = [];
@@ -985,6 +999,7 @@ function inputInsert(inputInsertValue){
 				drawRectangle(explanationBoxWidth / 2 - rectangleWidth / 2,y,rectangleWidth,rectangleHeight,input, pastelBlue);
 				pauseAnimation();
 				inputButton.textContent = ">";
+				deactivateAllButtons("insert");
 				insertTooltip.innerHTML = "Animation fortsetzen";
 			}else{
 				explanationText = expAnimationDeactivated;
@@ -1025,7 +1040,6 @@ function inputDelete(inputDeleteValue){
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		let y = Math.round(((explanationBoxHeight) / 100) * 3);
 		c.font = "16px Roboto";
-		//TODO delete value
 		insertedValues.push('-' + deleteValue.toString());
 		console.log("Inserted Values Delete: " + insertedValues);
 		tree.eventList = [];
@@ -1051,6 +1065,7 @@ function inputDelete(inputDeleteValue){
 			getBTree(y);
 			pauseAnimation();
 			inputDeleteButton.textContent = ">";
+			deactivateAllButtons("delete");
 			deleteTooltip.innerHTML = "Animation fortsetzen";
 		}else{
 			explanationText = expAnimationDeactivated;
@@ -1245,7 +1260,6 @@ function drawTree(tree){
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 	if(!isAnimationDisabled){
-		disableButton(resetButton);
 		iterateTroughTreeAndDraw(tree);
 		drawLines(oldLineCoordinatesXY);
 	}else{
@@ -1259,7 +1273,6 @@ function drawTreeWithTempLines(tree){
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 	if(!isAnimationDisabled){
-		disableButton(resetButton);
 		drawLines(tempLineCoordinatesXY);
 		iterateTroughTreeAndDraw(tree);
 	}else{
@@ -1277,7 +1290,6 @@ function drawStepTwo(){
 		if(!pause){
 			activateButton(animationPauseButton);
 		}
-		disableButton(resetButton);
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		drawLines(lineCoordinatesXY);
 		calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
@@ -1296,7 +1308,7 @@ function drawStepTwo(){
 		drawTree(drawnTree);
 		window.cancelAnimationFrame(animationId);
 		changeButtonsToStart()
-		disableButton(animationPauseButton);
+		deactivateButton(animationPauseButton);
 		if(treeIsDrawnFromUpload){
 			drawTreeFromUpload();
 		}
@@ -1315,7 +1327,6 @@ function drawReassembledTree(){
 		if(!pause){
 			activateButton(animationPauseButton);
 		}
-		disableButton(resetButton);
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 		iterateTroughTreeAndDraw(drawnTree);
@@ -1341,7 +1352,7 @@ function drawReassembledTree(){
 				pauseAnimation();
 			}else{
 				oldLineCoordinatesXY = lineCoordinatesXY;
-				disableButton(animationPauseButton);
+				deactivateButton(animationPauseButton);
 				explanationText = expAnimationDone;
 				calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 				nodeCanGetDeletedNow = false;
@@ -1399,7 +1410,6 @@ function insertDraw(){
 		if(!pause){
 			activateButton(animationPauseButton);
 		}
-		disableButton(resetButton);
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		calculateWrapTextAndDraw(explanationText, explanationTextX, explanationTextY, explanationTextWidth, explanationTextLineHeight, "black");
 		if(oldLineCoordinatesXY){
