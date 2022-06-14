@@ -3,6 +3,7 @@
 let textFieldInput = document.getElementById("treeInputInsert");
 let inputButton = document.getElementById("submitInsert");
 let inputDeleteButton = document.getElementById("submitDelete");
+let undoButton = document.getElementById("submitUndo");
 let resetButton = document.getElementById("submitReset");
 let radiosTreeType = document.getElementsByName("treeType");
 let changeTypeButton = document.getElementById("changeType");
@@ -84,6 +85,7 @@ let treeIsDrawnFromUpload = false;
 let uploadValues = [];
 let swappedValue;
 let updatedNodes = [];
+let insertedValues = [];
 
 const expInit = "Herzlich willkommen beim B-Baum-Animator! <br> <br> " +
 	"Diese Animation dient dazu, die Vorgehensweise beim geordneten Einfügen und Löschen von Werten im B-Baum darzustellen. <br> <br> " +
@@ -153,6 +155,11 @@ function insertValue(){
 		inputInsert(input);
 	}
 }
+
+inputDeleteButton.addEventListener('click', function(){
+	deleteValue();
+});
+
 function deleteValue(){
 	let input = textFieldInput.value;
 	if (inputDeleteButton.textContent == ">"){
@@ -162,11 +169,13 @@ function deleteValue(){
 	}
 }
 
-window.addEventListener('resize', resizeCanvas, false);
-
-inputDeleteButton.addEventListener('click', function(){
-	deleteValue();
+undoButton.addEventListener('click', function(){
+	undoStep();
 });
+function undoStep(){
+}
+}
+window.addEventListener('resize', resizeCanvas, false);
 
 
 resetButton.addEventListener('click', function(){
