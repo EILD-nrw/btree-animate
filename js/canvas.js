@@ -14,6 +14,9 @@ let helpButton = document.getElementById("helpButton");
 let closeModal = document.getElementsByClassName("close-button")[0];
 let animationsgeschwindigkeit = document.getElementById("animationsgeschwindigkeit");
 let animationCheckbox = document.getElementById("animationCheckbox");
+let numbersExampleRadio = document.getElementById("numbersExample");
+let wordsExampleRadio = document.getElementById("wordsExample");
+let ownExampleRadio = document.getElementById("ownExample");
 let fileUpload = document.getElementById('btreeUpload');
 let drawTreeFromUploadButton = document.getElementById('drawFromFile');
 let insertTooltip = document.getElementById('tooltipInsert');
@@ -39,7 +42,8 @@ let lineHeight = c.measureText('M').width;
 //dimensions for explanation text and box
 let explanationBoxX = 10;
 let explanationBoxY = 10;
-let explanationBoxWidth = canvas.width * 0.3;
+let explanationBoxWidth;
+calculateExplanationBoxWidth();
 let explanationBoxHeight = canvas.height - 20;
 let explanationText = "Default";
 let explanationTextX = 20;
@@ -80,13 +84,16 @@ let insertNode;
 let isDeleting = false;
 let deletedValue;
 let isAnimationDisabled = false;
-let btreeValuesFromUpload;
+let btreeValuesFromUpload = null;
 let splitcounter = 0;
 let treeIsDrawnFromUpload = false;
 let uploadValues = [];
 let swappedValue;
 let updatedNodes = [];
 let insertedValues = [];
+numbersExampleRadio.checked = true;
+fileUpload.value = "";
+fileUpload.disabled = true;
 
 const expInit = "Herzlich willkommen beim B-Baum-Animator! <br> <br> " +
 	"Diese Animation dient dazu, die Vorgehensweise beim geordneten Einfügen und Löschen von Werten im B-Baum darzustellen. <br> <br> " +
@@ -221,11 +228,36 @@ fileUpload.addEventListener("change",function(event){
 
 });
 
+numbersExampleRadio.addEventListener("click", function(){
+	fileUpload.disabled = true;
+	activateButton(drawTreeFromUploadButton);
+});
+
+wordsExampleRadio.addEventListener("click", function(){
+	fileUpload.disabled = true;
+	activateButton(drawTreeFromUploadButton);
+});
+
+ownExampleRadio.addEventListener("click", function(){
+	fileUpload.disabled = false;
+	if (fileUpload.files[0] != ""){
+		activateButton(drawTreeFromUploadButton);
+	} else {
+		deactivateButton(drawTreeFromUploadButton);
+	}
+});
+
 drawTreeFromUploadButton.addEventListener("click", function() {
 	if (confirm("Um den Import zu beginnen, wird der aktuelle Baum gelöscht.")){
 		modal.style.display = "none";
 		resetTree();
-		uploadValues = btreeValuesFromUpload.split(',');
+		if (numbersExampleRadio.checked){
+			uploadValues = ["1", "3", "5", "7", "19", "17", "15", "13", "11", "9"];
+		} else if (wordsExampleRadio.checked){
+			uploadValues = ["Koch", "Wolf", "Klein", "Braun", "Jung"];
+		} else {
+			uploadValues = btreeValuesFromUpload.split(',');
+		}
 		drawTreeFromUpload();
 	}
 });
@@ -264,21 +296,18 @@ animationCheckbox.addEventListener("change", function(){
 });
 
 importButton.onclick = function(){
-	if(fileUpload.files[0]){
-		activateButton(drawTreeFromUploadButton);
-	}else{
-		deactivateButton(drawTreeFromUploadButton);
-	}
 	modal.style.display = "block";
 }
-
-helpButton.addEventListener("click",function(){
-	calculateWrapTextAndDraw(expHelp, explanationTextX , explanationTextY, explanationTextWidth * 1.5, explanationTextLineHeight, "black");
-});
 
 closeModal.onclick = function (){
 	modal.style.display = "none";
 }
+
+
+
+helpButton.addEventListener("click",function(){
+	calculateWrapTextAndDraw(expHelp, explanationTextX , explanationTextY, explanationTextWidth * 1.5, explanationTextLineHeight, "black");
+});
 
 window.onclick = function(event){
 	if(event.target === modal){
@@ -1715,11 +1744,24 @@ function calculateWrapTextAndDraw(text, x, y, width, lineHeight, fillStyle) {
 	c.fillText(line, x, y);
 }
 
+function calculateExplanationBoxWidth(){
+	if (canvas.width * 0.3 > 400){
+		if (canvas.width * 0.3 < 500){
+			explanationBoxWidth = canvas.width * 0.3;
+		} else {
+			explanationBoxWidth = 500;
+		}
+	} else {
+		explanationBoxWidth = 400;
+	}
+}
+
 function resizeCanvas(){
 	canvas.height = window.innerHeight - 315;
 	canvas.width = window.innerWidth;
 
-	explanationBoxWidth = canvas.width * 0.3 > 300 ? canvas.width * 0.3 : 300;
+	calculateExplanationBoxWidth();
+
 	explanationBoxHeight = canvas.height - 20;
 
 	explanationTextWidth = explanationBoxWidth * 0.95;
