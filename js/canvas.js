@@ -39,7 +39,7 @@ let lineHeight = c.measureText('M').width;
 //dimensions for explanation text and box
 let explanationBoxX = 10;
 let explanationBoxY = 10;
-let explanationBoxWidth = canvas.width * 0.2;
+let explanationBoxWidth = canvas.width * 0.3;
 let explanationBoxHeight = canvas.height - 20;
 let explanationText = "Default";
 let explanationTextX = 20;
@@ -92,19 +92,18 @@ const expInit = "Herzlich willkommen beim B-Baum-Animator! <br> <br> " +
 	"Diese Animation dient dazu, die Vorgehensweise beim geordneten Einfügen und Löschen von Werten im B-Baum darzustellen. <br> <br> " +
 	"Geben Sie dazu den Wert in die Zeile ein und klicken auf 'Einfügen' (oder betätigen die 'Enter'-Taste), um einen Wert einzufügen. <br> <br> " +
 	"Mit einem Klick auf 'Löschen' (oder Betätigung der 'Entfernen'-Taste) können Sie einen bereits eingefügten Wert wieder entfernen. <br> <br> " +
-	"" +
 	"Anschließend wird der Ablauf schrittweise animiert und erklärt.";
 
-const expHelp = "Die Anwendung soll die Schritte beim Aufbau eines B-Baums visualisieren <br> " +
-	"Dabei wird jeder Schritt einzeln animiert und erklärt. <br> " +
+const expHelp = "Die Anwendung soll die Schritte beim Aufbau eines B-Baums visualisieren. " +
+	"Dabei wird jeder Schritt einzeln animiert und erklärt. " +
 	"Die Animation können Sie über die Bedienelemente rechts konfigurieren. <br> <br> " +
-	"Über den 'Import'-Button können Sie einen Baum als txt-Datei importieren: <br> " +
-	"Dabei müssen die einzugebenden Werte mit Komma separiert eingetragen sein. <br> " +
-	"Um ein Element zu löschen, muss es mit einem - versehen sein. <br> " +
+	"Über den 'Import'-Button können Sie einen Baum als txt-Datei importieren: " +
+	"Dabei müssen die einzugebenden Werte mit Komma separiert eingetragen sein. " +
+	"Um ein Element zu löschen, muss es mit einem - versehen sein. " +
 	"Ein gültiges Beispiel wäre: 3, 2, 7, 9, 10, -7, -10, -3, 5 <br> <br> " +
-	"Eine korrekte Einordnung der Elemente kann bei einem Baum des Typs 1 für die Tiefe 5 (bei Zahlen) bzw. 4 (bei Wörtern) garantiert werden. <br> " +
+	"Eine korrekte Einordnung der Elemente kann bei einem Baum des Typs 1 für die Tiefe 5 (bei Zahlen) bzw. 4 (bei Wörtern) garantiert werden. " +
 	"Bei größeren Typen verringert sich diese Tiefe. <br> <br> " +
-	"Bei der Eingabe von Umlauten werden diese in ihre äquivalente Form nach DIN 5007 Variante 2 zur Sortierung von Namenslisten umgewandelt (z.B. Ä zu AE). <br> " +
+	"Bei der Eingabe von Umlauten werden diese in ihre äquivalente Form nach DIN 5007 Variante 2 zur Sortierung von Namenslisten umgewandelt (z.B. Ä zu AE). " +
 	"Durch die Umwandlung wird das eingegebene Wort länger, weshalb es bei mehr als zwei Umlauten die Ausmaße der Box überschreiten kann."
 
 
@@ -1720,7 +1719,7 @@ function resizeCanvas(){
 	canvas.height = window.innerHeight - 315;
 	canvas.width = window.innerWidth;
 
-	explanationBoxWidth = canvas.width * 0.2 > 300 ? canvas.width * 0.2 : 300;
+	explanationBoxWidth = canvas.width * 0.3 > 300 ? canvas.width * 0.3 : 300;
 	explanationBoxHeight = canvas.height - 20;
 
 	explanationTextWidth = explanationBoxWidth * 0.95;
