@@ -128,10 +128,10 @@ const expRotateLeft = "Der rechte Nachbarknoten des gelöschten Wertes besitzt g
 
 // Colors
 const green = "rgba(89, 178, 89,1)";
-const pastelGreen = "rgba(89, 178, 89,0.5)";
+const pastelGreen = "rgba(89, 178, 89,0.35)";
 const red = "rgba(255, 0, 0,0.5)";
 const blue = "rgba(0, 117, 175,1)";
-const pastelBlue = "rgba(0, 117, 175,0.5)";
+const pastelBlue = "rgba(0, 117, 175,0.35)";
 const yellow = "rgba(255, 255, 0,0.5)";
 
 window.onbeforeunload = function(e) {
@@ -179,6 +179,7 @@ function deleteValue(){
 undoButton.addEventListener('click', function(){
 	undoStep();
 });
+
 function undoStep(){
 	insertedValues.pop();
 	let values = Object.values(insertedValues);
@@ -193,6 +194,7 @@ function undoStep(){
 		drawTreeFromUpload();
 	}
 }
+
 window.addEventListener('resize', resizeCanvas, false);
 
 
@@ -306,7 +308,7 @@ closeModal.onclick = function (){
 
 
 helpButton.addEventListener("click",function(){
-	calculateWrapTextAndDraw(expHelp, explanationTextX , explanationTextY, explanationTextWidth * 1.5, explanationTextLineHeight, "black");
+	calculateWrapTextAndDraw(expHelp, explanationTextX , explanationTextY, explanationTextWidth * 1, explanationTextLineHeight, "black");
 });
 
 window.onclick = function(event){
@@ -1717,7 +1719,7 @@ function getBTree(yValue){
 function calculateWrapTextAndDraw(text, x, y, width, lineHeight, fillStyle) {
 	c.clearRect(11, 11, width, explanationBoxHeight);
 	c.font = "16px Roboto";
-	c.fillStyle = "#98c1d5";
+	c.fillStyle = pastelBlue;
 	c.fillRect(explanationBoxX, explanationBoxY, width + 10, explanationBoxHeight);
 	c.strokeRect(11,11, width + 10, explanationBoxHeight);
 	let words = text.split(' ');
