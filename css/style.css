@@ -76,7 +76,13 @@ input[type="text"]{
 }
 
 #tooltipRadio{
-	width: 180px;
+	width: 230px;
+	bottom:140%;
+	left:-70px
+}
+
+.tooltipRadio{
+	width: 230px;
 	bottom:140%;
 	left:-70px
 }
