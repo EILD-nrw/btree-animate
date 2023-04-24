@@ -17,14 +17,20 @@ Schlagworte: Datenbanksysteme, Index, B-Baum, Animation
 
 Verwenden Sie am besten die [auf GitHub bereitgestellten Version](https://eild-nrw.github.io/btree-animate/). Diese wird bei Änderungen regelmäßig Aktualisiert und muss nicht selbst betrieben werden.
 
-## Lizenz
-[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
-Der B-Baum Animator wurde an der Hochschule Düsseldorf von Jonas Baur im Rahmen seiner Bachelor-Arbeit entwickelt und im Rahmen des EILD-Projekts von Charlotte Hasler weiterentwickelt. Dieses Repository enthält Software unter MIT-Lizenz und Content unter [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa]. Content sind insbesondere die Erklärungstexte der Animation.
+## Lizenzen
+[![License: MIT][MIT-shield]][MIT]
 
-Ausgenommen von der Lizenz sind die verwendeten Logos sowie alle anders lizenzierten Inhalte.
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+
+Der B-Baum Animator wurde an der Hochschule Düsseldorf von Jonas Baur im Rahmen seiner Bachelor-Arbeit entwickelt und im Rahmen des EILD-Projekts von Charlotte Hasler weiterentwickelt. Dieses Repository enthält Software unter MIT-Lizenz und Content unter Creative Commons Attribution-ShareAlike 4.0 International License. Content sind insbesondere die Erklärungstexte der Animation. Ausgenommen von der CC BY-SA 4.0 Lizenz sind die verwendeten Logos sowie alle anders lizenzierten Inhalte.
 
 [![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
 
+![image](https://user-images.githubusercontent.com/73349129/233968870-b61f0850-e7c2-489f-a597-53e030794b22.png)
+
+
+[MIT]: https://github.com/EILD-nrw/btree-animate/blob/master/LICENCE
+[MIT-shield]: https://img.shields.io/badge/License-MIT-yellow.svg
 [cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
 [cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
 [cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
