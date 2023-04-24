@@ -7,6 +7,8 @@ Die Anwendung basiert auf dem [B-Baum-Zeichner](https://github.com/orca-nrw/b-tr
 
 In EILD wird ein Ansatz mit weitgehender Adaptierbarkeit und Wiederverwendbarkeit der Lehrinhalte umgesetzt.
 
+Schlagworte: Datenbanksysteme, Index, B-Baum, Animation
+
 ## Weitere Informationen
 - [EILD.nrw Informationen](https://www.eild.nrw/)
 - [EILD.nrw GitHub](https://github.com/EILD-nrw)
