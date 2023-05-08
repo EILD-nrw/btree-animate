@@ -28,7 +28,7 @@ BTree-Animate basiert auf dem B-Baum-Zeichner [BTree] der [Technischen Hochschul
 ![image](https://user-images.githubusercontent.com/73349129/233968870-b61f0850-e7c2-489f-a597-53e030794b22.png)
 
 
-[MIT]: https://github.com/EILD-nrw/btree-animate/blob/master/LICENCE
+[MIT]: https://github.com/EILD-nrw/btree-animate/blob/master/LICENSE
 [MIT-shield]: https://img.shields.io/badge/License-MIT-yellow.svg
 [cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
 [cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
