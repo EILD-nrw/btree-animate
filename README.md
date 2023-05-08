@@ -9,7 +9,6 @@ Schlagworte: Datenbanksysteme, Datenbank, Index, B-Baum, Animation
 ## Weitere Informationen
 BTree Animate wurde im Projekt EILD.nrw weiterentwickelt. In EILD.nrw wird ein Ansatz mit weitgehender Adaptierbarkeit und Wiederverwendbarkeit der Lehrinhalte umgesetzt. Die entwickelten OER werden über ORCA.nrw zur Verfügung gestellt.
 - [EILD.nrw]
-- [EILD.nrw GitHub]
 - [ORCA.nrw]
 - [ORCA.nrw Github]
 
