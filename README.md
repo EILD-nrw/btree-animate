@@ -36,7 +36,7 @@ BTree-Animate basiert auf dem B-Baum-Zeichner [BTree] der [Technischen Hochschul
 [HSD]: https://www.hs-duesseldorf.de/
 [TH Köln]: https://www.th-koeln.de/
 [BTree]: https://github.com/orca-nrw/b-tree
-[BTree Animate GH Pages]: https://eild-nrw.github.io/btree-animate/
+[BTree Animate GH Pages]: https://orca-nrw.github.io/btree-animate/
 [EILD.nrw]: https://www.eild.nrw/
 [EILD.nrw GitHub]: https://github.com/EILD-nrw
 [ORCA.nrw]: https://www.orca.nrw/
