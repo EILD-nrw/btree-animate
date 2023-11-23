@@ -7,20 +7,21 @@ Um das Verständnis für den Aufbau von B-Bäumen als Datenbankindex zu fördern
 Schlagworte: Datenbanksysteme, Datenbank, Index, B-Baum, Animation
 
 ## Weitere Informationen
-BTree Animate wurde im Projekt EILD.nrw weiterentwickelt. In EILD.nrw wird ein Ansatz mit weitgehender Adaptierbarkeit und Wiederverwendbarkeit der Lehrinhalte umgesetzt.
+BTree Animate wurde im Projekt EILD.nrw weiterentwickelt. In EILD.nrw wird ein Ansatz mit weitgehender Adaptierbarkeit und Wiederverwendbarkeit der Lehrinhalte umgesetzt. Die entwickelten OER werden über ORCA.nrw zur Verfügung gestellt.
 - [EILD.nrw]
-- [EILD.nrw GitHub]
+- [ORCA.nrw]
+- [ORCA.nrw Github]
 
 ## Verwendung
 
-Verwenden Sie am besten die auf GitHub bereitgestellten Version [BTree Animate GH Pages]. Diese wird bei Änderungen regelmäßig aktualisiert und muss nicht selbst betrieben werden.
+Verwenden Sie am besten die auf GitHub bereitgestellte Version [BTree Animate GH Pages]. Diese wird bei Änderungen regelmäßig aktualisiert und muss nicht selbst betrieben werden.
 
 ## Lizenzierung
 [![License: MIT][MIT-shield]][MIT]
 
 [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
-BTree-Animate basiert auf dem B-Baum-Zeichner [BTree] der [Technischen Hochschule Köln][TH Köln], wurde an der [Hochschule Düsseldorf][HSD] von Jonas Baur im Rahmen seiner Bachelor-Arbeit mit Animationen ergänzt und im Rahmen des Projektes [EILD.nrw] von Charlotte Hasler weiterentwickelt. Dieses Repository enthält Software unter [MIT-Lizenz][MIT] und Content unter [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa]. Content sind insbesondere die Erklärungstexte der Animation. Ausgenommen von der CC BY-SA 4.0 Lizenz sind die verwendeten Logos sowie alle anders lizenzierten Inhalte.
+BTree-Animate basiert auf dem B-Baum-Zeichner [BTree] der [Technischen Hochschule Köln][TH Köln]. Jonas Baur entwickelte in seiner Bachelor-Arbeit an der [Hochschule Düsseldorf][HSD] die animierte und mit Erklärungen versehene Darstellung zum Ablauf. Im Projekt [EILD.nrw] entwickelte Charlotte Hasler die Arbeit weiter. Dieses Repository enthält Software unter [MIT-Lizenz][MIT] und Content unter [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa]. Content sind insbesondere die Erklärungstexte der Animation. Ausgenommen von der CC BY-SA 4.0 Lizenz sind die verwendeten Logos sowie alle anders lizenzierten Inhalte.
 
 [![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
 
@@ -35,6 +36,8 @@ BTree-Animate basiert auf dem B-Baum-Zeichner [BTree] der [Technischen Hochschul
 [HSD]: https://www.hs-duesseldorf.de/
 [TH Köln]: https://www.th-koeln.de/
 [BTree]: https://github.com/orca-nrw/b-tree
-[BTree Animate GH Pages]: https://eild-nrw.github.io/btree-animate/
+[BTree Animate GH Pages]: https://orca-nrw.github.io/btree-animate/
 [EILD.nrw]: https://www.eild.nrw/
 [EILD.nrw GitHub]: https://github.com/EILD-nrw
+[ORCA.nrw]: https://www.orca.nrw/
+[ORCA.nrw Github]: https://github.com/orca-nrw
