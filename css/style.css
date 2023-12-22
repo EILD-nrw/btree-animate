@@ -8,7 +8,6 @@
 }
 
 html {
-	background-color: #006699;
 	font-family: Roboto, sans-serif;
 }
 
@@ -16,30 +15,88 @@ body{
 	margin: 0;
 	line-height: 1.6em;
 	font-size: 16px;
+	display: flex;
+	flex-direction: column;
 }
 
 .main-header{
+	color: #fff;
 	background-color: #00324c;
-	color: #f1f2f6;
 	padding: 1px;
-	border-bottom: 3px solid black;
+	border-bottom: 8px solid #98c1d5;
 }
 
 .main-header h1{
 	margin-left: 1em;
 }
 
+.control{
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	border-bottom: 8px solid #98c1d5;
+	background-color: #fff;
+}
+
+.content {
+	flex: 1;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	padding: 0.5em;
+}
+
 .form{
 	display: flex;
 	justify-content: space-between;
 	padding: 0 2em 0 2em;
-}
-
-.form-radio{
-	margin-top: 0.5em;
 	color: #fff;
-
 }
+
+.tree-type{ grid-area: tree-type}
+.change-button{grid-area: change-button}
+
+.radio-grid-container {
+	display: grid;
+	grid-template-areas:
+	'tree-type change-button';
+	color: #00324c;
+	gap: 10px;
+	background-color: rgba(201,231,242,0.3);
+	padding:0.5em 0.5em;
+	margin-top:0.5em;
+	margin-bottom: 0.5em;
+	border: 2px solid #00324c;
+	border-radius: 3px;
+}
+
+.container{
+	display: flex;
+	background-color: white;
+	padding: 0.5em;
+	flex: 1;
+	max-height: 100%;
+}
+
+#canvas-container{
+	flex: 0 0 70%;
+	overflow-x: auto; /* Hinzufügen einer horizontalen Scrollbar, wenn der Inhalt zu breit wird */
+	overflow-y: auto;
+	/* overflow: auto; */
+	padding: 0.5em;
+	box-sizing: border-box;
+}
+
+#explanation-container {
+	flex: 0 0 30%;
+	padding: 0.5em;
+	box-sizing: border-box;
+	overflow-y: auto;
+	overflow-wrap: break-word;
+	border: 0.1em solid #00324c;
+	background-color: rgba(201,231,242,0.3);
+}
+
 
 .form-animation{
 	display: flex;
@@ -59,7 +116,7 @@ input[type="text"]{
 	-webkit-appearance: none;
 	width: 100%;
 	height: 35px;
-	background: #a6cfe3;
+	background: #C9E7F2;
 	outline: 2px solid black;
 	border-radius: 3px;
 	-webkit-transition: .2s;
@@ -90,13 +147,15 @@ input[type="text"]{
 img {
 	height: 100px;
 }
+
 #btreeInformation {
 	float:right;
 	margin-top: 10px;
 	text-align: right;
 	margin-right: 10px;
-	color: #006699;
+	color: white;
 }
+
 .slider::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	appearance: none;
@@ -123,12 +182,17 @@ button{
 	font-weight: bold;
 }
 
+#changeType {
+	margin-left: 0; /* Reset left margin to align with the radio groups */
+}
+
 #treeInputInsert {
 	padding:10px 15px;
-	background-color: #a6cfe3;
+	background: #C9E7F2;
 	border: 2px solid black;
 	border-radius: 3px;
 }
+
 canvas {
 	/*display:flex;*/
 	background-color: white;
@@ -143,7 +207,7 @@ canvas {
 
 #animationsgeschwindigkeit{
 	display: inline-block;
-	color: #fff;
+	color: #00324c;
 	font-weight: bold;
 }
 
@@ -222,46 +286,10 @@ input[type="radio"], input[type="checkbox"] {
 	cursor: pointer;
 }
 
-.content {
-	flex: 1;
-	overflow-y: auto;
-	display: flex;
-	flex-direction: column;
-	padding: 0.5em;
-}
-
-
-.container{
-	display: flex;
-	background-color: white;
-	padding: 0.5em;
-	flex: 1;
-	max-height: 100%;
-}
-
-#canvas-container{
-	flex: 0 0 70%;
-	overflow-x: auto; /* Hinzufügen einer horizontalen Scrollbar, wenn der Inhalt zu breit wird */
-	overflow-y: auto;
-	/* overflow: auto; */
-	padding: 0.5em;
-	box-sizing: border-box;
-}
-
-#explanation-container {
-	flex: 0 0 30%;
-	padding: 0.5em;
-	box-sizing: border-box;
-	overflow-y: auto;
-	overflow-wrap: break-word;
-	border: 0.1em solid #00324c;
-	background-color: rgba(201,231,242,0.3);
-}
-
 table{
 	padding-left: 10px;
 	background-color: #fff;
 	height: 115px;
-	margin-top: -30px;
+	margin: 0.2em;
 	width:100%;
 }
