@@ -3,7 +3,7 @@
 	src: url(roboto_regular.ttf);
 }
 
-*{
+* {
 	box-sizing: border-box;
 }
 
@@ -11,7 +11,7 @@ html {
 	font-family: Roboto, sans-serif;
 }
 
-body{
+body {
 	margin: 0;
 	line-height: 1.6em;
 	font-size: 16px;
@@ -19,18 +19,18 @@ body{
 	flex-direction: column;
 }
 
-.main-header{
+.main-header {
 	color: #fff;
 	background-color: #00324c;
 	padding: 1px;
 	border-bottom: 8px solid #98c1d5;
 }
 
-.main-header h1{
+.main-header h1 {
 	margin-left: 1em;
 }
 
-.control{
+.control {
 	position: sticky;
 	top: 0;
 	z-index: 1000;
@@ -46,31 +46,36 @@ body{
 	padding: 0.5em;
 }
 
-.form{
+.form {
 	display: flex;
 	justify-content: space-between;
 	padding: 0 2em 0 2em;
 	color: #fff;
 }
 
-.tree-type{ grid-area: tree-type}
-.change-button{grid-area: change-button}
+.tree-type {
+	grid-area: tree-type
+}
+
+.change-button {
+	grid-area: change-button
+}
 
 .radio-grid-container {
 	display: grid;
 	grid-template-areas:
-	'tree-type change-button';
+		'tree-type change-button';
 	color: #00324c;
 	gap: 10px;
-	background-color: rgba(201,231,242,0.3);
-	padding:0.5em 0.5em;
-	margin-top:0.5em;
+	background-color: rgba(201, 231, 242, 0.3);
+	padding: 0.5em 0.5em;
+	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 	border: 2px solid #00324c;
 	border-radius: 3px;
 }
 
-.container{
+.container {
 	display: flex;
 	background-color: white;
 	padding: 0.5em;
@@ -78,9 +83,10 @@ body{
 	max-height: 100%;
 }
 
-#canvas-container{
+#canvas-container {
 	flex: 0 0 70%;
-	overflow-x: auto; /* Hinzufügen einer horizontalen Scrollbar, wenn der Inhalt zu breit wird */
+	overflow-x: auto;
+	/* Hinzufügen einer horizontalen Scrollbar, wenn der Inhalt zu breit wird */
 	overflow-y: auto;
 	/* overflow: auto; */
 	padding: 0.5em;
@@ -94,20 +100,20 @@ body{
 	overflow-y: auto;
 	overflow-wrap: break-word;
 	border: 0.1em solid #00324c;
-	background-color: rgba(201,231,242,0.3);
+	background-color: rgba(201, 231, 242, 0.3);
 }
 
 
-.form-animation{
+.form-animation {
 	display: flex;
 	align-items: flex-start;
 }
 
-p{
+p {
 	font-weight: bold;
 }
 
-input[type="text"]{
+input[type="text"] {
 	padding: 8px;
 }
 
@@ -127,18 +133,20 @@ input[type="text"]{
 	opacity: 1;
 }
 
-#sliderDiv{
+#sliderDiv {
 	width: 300px;
 	text-align: center;
 }
 
-.tooltipRadio{
+.tooltipRadio {
 	width: 230px;
-	bottom:140%;
-	left:-70px
+	bottom: 140%;
+	left: -70px
 }
 
-#tooltipDelete, #tooltipInsert, #tooltipPauseAnimation {
+#tooltipDelete,
+#tooltipInsert,
+#tooltipPauseAnimation {
 	width: 160px;
 	bottom: 175%;
 	left: -20%;
@@ -149,7 +157,7 @@ img {
 }
 
 #btreeInformation {
-	float:right;
+	float: right;
 	margin-top: 10px;
 	text-align: right;
 	margin-right: 10px;
@@ -172,10 +180,10 @@ img {
 	cursor: pointer;
 }
 
-button{
+button {
 	background-color: #336633;
 	color: #fff;
-	padding:10px 15px;
+	padding: 10px 15px;
 	border: 2px solid black;
 	cursor: pointer;
 	border-radius: 3px;
@@ -183,11 +191,12 @@ button{
 }
 
 #changeType {
-	margin-left: 0; /* Reset left margin to align with the radio groups */
+	margin-left: 0;
+	/* Reset left margin to align with the radio groups */
 }
 
 #treeInputInsert {
-	padding:10px 15px;
+	padding: 10px 15px;
 	background: #C9E7F2;
 	border: 2px solid black;
 	border-radius: 3px;
@@ -205,25 +214,27 @@ canvas {
 	padding-bottom: 0.5em;
 }
 
-#animationsgeschwindigkeit{
+#animationsgeschwindigkeit {
 	display: inline-block;
 	color: #00324c;
 	font-weight: bold;
 }
 
-#importButton{
+#importButton {
 	margin-left: 20px;
 }
 
-a:link, a:visited{
-	color: #006699;
+a:link,
+a:visited {
+	color: #C9E7F2;
 }
 
 a:hover {
 	color: #336633;
 }
 
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
 	accent-color: #00324c;
 }
 
@@ -261,7 +272,7 @@ input[type="radio"], input[type="checkbox"] {
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	background-color: rgba(0,0,0,0.4);
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -286,10 +297,15 @@ input[type="radio"], input[type="checkbox"] {
 	cursor: pointer;
 }
 
-table{
+table {
 	padding-left: 10px;
 	background-color: #fff;
 	height: 115px;
 	margin: 0.2em;
-	width:100%;
+	width: 100%;
+}
+
+.footer a:link,
+.footer a:visited {
+	color: black;
 }
