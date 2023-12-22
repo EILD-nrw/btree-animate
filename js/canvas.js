@@ -24,8 +24,8 @@ let deleteTooltip = document.getElementById('tooltipDelete');
 let animationTooltip = document.getElementById('tooltipAnimation');
 
 // set up canvas
-let canvas = document.querySelector('canvas');
-canvas.style.backgroundColor = 'white';
+let canvas = document.getElementById('myCanvas');
+console.log(canvas.id);
 canvas.height = window.innerHeight - 315;
 canvas.width = window.innerWidth;
 let c = canvas.getContext('2d');
@@ -35,13 +35,11 @@ let rectangleWidth = 55;
 let rectangleHeight = 24;
 
 // Font size and design
-c.font = "16px Roboto";
-let lineWidth = c.measureText('M').width;
+const fontStyle = "16px Roboto"
+c.font = fontStyle;
 let lineHeight = c.measureText('M').width;
 
 //dimensions for explanation text and box
-let explanationBoxX = 10;
-let explanationBoxY = 10;
 let explanationBoxWidth;
 calculateExplanationBoxWidth();
 let explanationBoxHeight = canvas.height - 20;
@@ -1008,7 +1006,7 @@ function inputInsert(inputInsertValue){
 		if(checkInput(input)){
 			c.clearRect(0, 0, canvas.width, canvas.height);
 			let y = Math.round(((explanationBoxHeight) / 100) * 3);
-			c.font = "16px Roboto";
+			c.font = fontStyle;
 			if(isNumberTree){
 				input = parseInt(input);
 			}else{
@@ -1070,7 +1068,7 @@ function inputDelete(inputDeleteValue){
 	if(checkDeleteValue(deleteValue)){
 		c.clearRect(0, 0, canvas.width, canvas.height);
 		let y = Math.round(((explanationBoxHeight) / 100) * 3);
-		c.font = "16px Roboto";
+		c.font = fontStyle;
 		insertedValues.push('-' + deleteValue.toString());
 		console.log("Inserted Values Delete: " + insertedValues);
 		tree.eventList = [];
@@ -1717,33 +1715,10 @@ function getBTree(yValue){
 }
 
 function calculateWrapTextAndDraw(text, x, y, width, lineHeight, fillStyle) {
-	c.clearRect(11, 11, width, explanationBoxHeight);
-	c.font = "16px Roboto";
+	c.font = fontStyle;
 	c.fillStyle = pastelBlue;
-	c.fillRect(explanationBoxX, explanationBoxY, width + 10, explanationBoxHeight);
-	c.strokeRect(11,11, width + 10, explanationBoxHeight);
-	let words = text.split(' ');
-	let line = '';
 	c.fillStyle = fillStyle;
-	for(let i = 0; i < words.length; i++) {
-		let testLine = line + words[i] + ' ';
-		let metrics = c.measureText(testLine);
-		let testWidth = metrics.width;
-		if (testWidth > width && i > 0 || words[i] === "<br>") {
-			c.fillText(line, x, y);
-			if (words[i] !== "<br>"){
-				line = words[i] + ' ';
-			} else {
-				line = "";
-			}
-			y += lineHeight;
-		}
-		else {
-			line = testLine;
-		}
-	}
-
-	c.fillText(line, x, y);
+	document.getElementById('explanation-text').innerHTML = text;
 }
 
 function calculateExplanationBoxWidth(){

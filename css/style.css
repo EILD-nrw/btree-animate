@@ -130,7 +130,10 @@ button{
 	border-radius: 3px;
 }
 canvas {
-	display:flex;
+	/*display:flex;*/
+	background-color: white;
+	display: block;
+	margin: 10px;
 }
 
 #firstRowInput {
@@ -217,6 +220,42 @@ input[type="radio"], input[type="checkbox"] {
 	color: #336633;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.content {
+	flex: 1;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	padding: 0.5em;
+}
+
+
+.container{
+	display: flex;
+	background-color: white;
+	padding: 0.5em;
+	flex: 1;
+	max-height: 100%;
+}
+
+#canvas-container{
+	flex: 0 0 70%;
+	overflow-x: auto; /* Hinzufügen einer horizontalen Scrollbar, wenn der Inhalt zu breit wird */
+	overflow-y: auto;
+	/* overflow: auto; */
+	padding: 0.5em;
+	box-sizing: border-box;
+}
+
+#explanation-container {
+	flex: 0 0 30%;
+	padding: 0.5em;
+	box-sizing: border-box;
+	overflow-y: auto;
+	overflow-wrap: break-word;
+	border: 0.1em solid #00324c;
+	background-color: rgba(201,231,242,0.3);
 }
 
 table{

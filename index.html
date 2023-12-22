@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>B-Baum-Animation</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -9,7 +10,7 @@
 <header class="main-header">
     <span id="btreeInformation">
         Eine Weiterentwicklung des <a href="https://github.com/EILD-nrw/b-tree">B-Baum-Zeichners</a> der TH Köln <br>
-        V.05-2022
+        V.12-2023
     </span>
     <h1>B-Baum-Animation</h1>
 </header>
@@ -105,10 +106,18 @@
         <button type="button" id="drawFromFile">Zeichne Baum</button>
     </div>
 </div>
-
-<canvas id="canvaswindow"></canvas>
-<script src="js/btree.js"></script>
-<script src="js/canvas.js"></script>
+<div class="content">
+    <div class="container">
+        <div id="explanation-container">
+            <p id="explanation-text">Platzhalter</p>
+        </div>
+        <div id="canvas-container">
+            <canvas id="myCanvas"></canvas>
+        </div>
+    </div>
+    <script src="js/btree.js"></script>
+    <script src="js/canvas.js"></script>
+</div>
 <table>
     <tr><td>
         <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
