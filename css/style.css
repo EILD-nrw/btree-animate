@@ -305,6 +305,13 @@ table {
 	width: 100%;
 }
 
+.footer {
+	margin-top: auto;
+	position: sticky;
+	bottom: 0;
+	z-index: 1000;
+}
+
 .footer a:link,
 .footer a:visited {
 	color: black;

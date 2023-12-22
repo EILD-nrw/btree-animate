@@ -1,4 +1,3 @@
-
 let textFieldInput = document.getElementById("treeInputInsert");
 let inputButton = document.getElementById("submitInsert");
 let inputDeleteButton = document.getElementById("submitDelete");
@@ -26,7 +25,7 @@ let animationTooltip = document.getElementById('tooltipAnimation');
 // set up canvas
 let canvas = document.getElementById('myCanvas');
 console.log(canvas.id);
-canvas.height = window.innerHeight - 315;
+canvas.height = window.innerHeight - 515;
 canvas.width = window.innerWidth;
 let c = canvas.getContext('2d');
 
